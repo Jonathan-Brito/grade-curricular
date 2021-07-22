@@ -1,2 +1,2 @@
-# grade-curricular
+#Grade-curricular
 Micro-serviço responsável pela manutenção de grade curricular.
