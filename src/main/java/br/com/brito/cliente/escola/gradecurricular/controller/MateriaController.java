@@ -1,7 +1,7 @@
 package br.com.brito.cliente.escola.gradecurricular.controller;
 
 import br.com.brito.cliente.escola.gradecurricular.domain.entities.Materia;
-import br.com.brito.cliente.escola.gradecurricular.domain.repositories.MateriaRepository;
+import br.com.brito.cliente.escola.gradecurricular.domain.service.MateriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,62 +20,38 @@ import java.util.List;
 @RequestMapping("/materias")
 public class MateriaController {
 
+
     @Autowired
-    private MateriaRepository materiaRepository;
+    private MateriaService materiaService;
 
     @GetMapping
-    public ResponseEntity<List<Materia>> listaMaterias(){
-        return ResponseEntity.status(HttpStatus.OK).body(materiaRepository.findAll());
+    public ResponseEntity<List<Materia>> listarMaterias() {
+        return ResponseEntity.status(HttpStatus.OK).body(this.materiaService.listar());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Materia> consultaPorMateria(@PathVariable("id") Long id){
-        return ResponseEntity.status(HttpStatus.OK).body(materiaRepository.findById(id).get());
+    public ResponseEntity<Materia> consultaMateria(@PathVariable Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(this.materiaService.consultar(id));
     }
 
     @PostMapping
-    public ResponseEntity<Boolean> cadastraMaterias(@RequestBody Materia materia){
-
-        try {
-            materiaRepository.save(materia);
-            return ResponseEntity.status(HttpStatus.OK).body(true);
-        }
-        catch (Exception exception){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(false);
-        }
+    public ResponseEntity<Boolean> cadastrarMateria(@RequestBody Materia materia) {
+        return ResponseEntity.status(HttpStatus.OK).body(this.materiaService.cadastrar(materia));
     }
 
     @PutMapping
-    public ResponseEntity<Boolean> atualizarMaterias(@RequestBody Materia materia) {
-        try {
-            //buscamos pela materia que gostaríamos de atualizar
-            Materia materiaAtualizada = this.materiaRepository.findById(materia.getId()).get();
+    public ResponseEntity<Boolean> atualizarMateria(@RequestBody Materia materia) {
 
-            //atualizamos todos os valores
-            materiaAtualizada.setName(materia.getName());
-            materiaAtualizada.setHours(materia.getHours());
-            materiaAtualizada.setCode(materia.getCode());
-            materiaAtualizada.setFrequency(materia.getFrequency());
+        return ResponseEntity.status(HttpStatus.OK).body(this.materiaService.atualizar(materia));
 
-
-            //salvamos as alteracoes
-            this.materiaRepository.save(materiaAtualizada);
-
-            return ResponseEntity.status(HttpStatus.OK).body(true);
-
-        }catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(false);
-        }
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Boolean> excluirMateria(@PathVariable Long id) {
-        try {
-            this.materiaRepository.deleteById(id);
-            return ResponseEntity.status(HttpStatus.OK).body(true);
 
-        }catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(false);
-        }
+        return ResponseEntity.status(HttpStatus.OK).body(this.materiaService.excluir(id));
+
     }
+
+
 }
