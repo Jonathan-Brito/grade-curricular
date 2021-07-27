@@ -1,7 +1,6 @@
-package br.com.brito.cliente.escola.gradecurricular.domain.entities;
+package br.com.brito.cliente.escola.gradecurricular.entities;
 
 import com.sun.istack.NotNull;
-import io.micrometer.core.lang.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -1,7 +1,8 @@
 package br.com.brito.cliente.escola.gradecurricular.controller;
 
-import br.com.brito.cliente.escola.gradecurricular.domain.entities.Materia;
-import br.com.brito.cliente.escola.gradecurricular.domain.service.MateriaService;
+import br.com.brito.cliente.escola.gradecurricular.dto.MateriaDto;
+import br.com.brito.cliente.escola.gradecurricular.entities.Materia;
+import br.com.brito.cliente.escola.gradecurricular.service.MateriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,12 +36,12 @@ public class MateriaController {
     }
 
     @PostMapping
-    public ResponseEntity<Boolean> cadastrarMateria(@RequestBody Materia materia) {
+    public ResponseEntity<Boolean> cadastrarMateria(@RequestBody MateriaDto materia) {
         return ResponseEntity.status(HttpStatus.OK).body(this.materiaService.cadastrar(materia));
     }
 
     @PutMapping
-    public ResponseEntity<Boolean> atualizarMateria(@RequestBody Materia materia) {
+    public ResponseEntity<Boolean> atualizarMateria(@RequestBody MateriaDto materia) {
 
         return ResponseEntity.status(HttpStatus.OK).body(this.materiaService.atualizar(materia));
 

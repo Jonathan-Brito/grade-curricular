@@ -1,12 +1,13 @@
-package br.com.brito.cliente.escola.gradecurricular.domain.service;
+package br.com.brito.cliente.escola.gradecurricular.service;
 
-import br.com.brito.cliente.escola.gradecurricular.domain.entities.Materia;
+import br.com.brito.cliente.escola.gradecurricular.dto.MateriaDto;
+import br.com.brito.cliente.escola.gradecurricular.entities.Materia;
 
 import java.util.List;
 
 public interface IMateriaService {
 
-    public Boolean atualizar(final Materia materia);
+    public Boolean atualizar(final MateriaDto materia);
 
     public Boolean excluir(final Long id);
 
@@ -23,5 +24,5 @@ public interface IMateriaService {
     /*
      * CADASTRAR uma matéria.
      */
-    public Boolean cadastrar(final Materia materia);
+    public Boolean cadastrar(final MateriaDto materia);
 }

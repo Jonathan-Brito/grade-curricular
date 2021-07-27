@@ -1,7 +1,7 @@
 package br.com.brito.cliente.escola.gradecurricular.handler;
 
-import br.com.brito.cliente.escola.gradecurricular.domain.model.ErrorResponse;
-import br.com.brito.cliente.escola.gradecurricular.domain.model.ErrorResponse.ErrorResponseBuilder;
+import br.com.brito.cliente.escola.gradecurricular.model.ErrorResponse;
+import br.com.brito.cliente.escola.gradecurricular.model.ErrorResponse.ErrorResponseBuilder;
 import br.com.brito.cliente.escola.gradecurricular.exception.MateriaException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

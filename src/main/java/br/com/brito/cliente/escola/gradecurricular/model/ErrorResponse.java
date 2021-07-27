@@ -1,4 +1,4 @@
-package br.com.brito.cliente.escola.gradecurricular.domain.model;
+package br.com.brito.cliente.escola.gradecurricular.model;
 
 import lombok.Builder;
 import lombok.Getter;

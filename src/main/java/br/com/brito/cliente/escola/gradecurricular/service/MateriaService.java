@@ -1,8 +1,10 @@
-package br.com.brito.cliente.escola.gradecurricular.domain.service;
+package br.com.brito.cliente.escola.gradecurricular.service;
 
-import br.com.brito.cliente.escola.gradecurricular.domain.entities.Materia;
-import br.com.brito.cliente.escola.gradecurricular.domain.repositories.MateriaRepository;
+import br.com.brito.cliente.escola.gradecurricular.dto.MateriaDto;
+import br.com.brito.cliente.escola.gradecurricular.entities.Materia;
+import br.com.brito.cliente.escola.gradecurricular.repositories.MateriaRepository;
 import br.com.brito.cliente.escola.gradecurricular.exception.MateriaException;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -43,9 +45,12 @@ public class MateriaService implements IMateriaService {
     }
 
     @Override
-    public Boolean cadastrar(Materia materia) {
+    public Boolean cadastrar(MateriaDto materia) {
         try {
-            this.materiaRepository.save(materia);
+            ModelMapper mapper = new ModelMapper();
+            Materia materia1 = mapper.map(materia, Materia.class);
+
+            this.materiaRepository.save(materia1);
             return true;
         } catch (Exception e) {
             return false;
@@ -53,26 +58,21 @@ public class MateriaService implements IMateriaService {
     }
 
     @Override
-    public Boolean atualizar(Materia materia) {
+    public Boolean atualizar(MateriaDto materia) {
         try {
             Optional<Materia> materiaOptional = this.materiaRepository.findById(materia.getId());
 
             if (materiaOptional.isPresent()){
 
-                // buscamos pela materia que gostaríamos de atualizar
-                Materia materiaAtualizada = materiaOptional.get();
+                ModelMapper mapper = new ModelMapper();
 
-                // atualizamos todos os valores
-                materiaAtualizada.setName(materia.getName());
-                materiaAtualizada.setCode(materia.getCode());
-                materiaAtualizada.setHours(materia.getHours());
-                materiaAtualizada.setName(materia.getName());
-                materiaAtualizada.setFrequency(materia.getFrequency());
+                // buscamos pela materia que gostaríamos de atualizar
+                Materia materiaAtualizada = mapper.map(materia, Materia.class);
 
                 // salvamos as alteracoes
                 this.materiaRepository.save(materiaAtualizada);
 
-                return Boolean.TRUE;
+                return true;
 
             }
 
