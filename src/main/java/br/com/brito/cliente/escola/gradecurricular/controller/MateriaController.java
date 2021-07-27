@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -36,12 +37,12 @@ public class MateriaController {
     }
 
     @PostMapping
-    public ResponseEntity<Boolean> cadastrarMateria(@RequestBody MateriaDto materia) {
+    public ResponseEntity<Boolean> cadastrarMateria(@Valid @RequestBody MateriaDto materia) {
         return ResponseEntity.status(HttpStatus.OK).body(this.materiaService.cadastrar(materia));
     }
 
     @PutMapping
-    public ResponseEntity<Boolean> atualizarMateria(@RequestBody MateriaDto materia) {
+    public ResponseEntity<Boolean> atualizarMateria(@Valid @RequestBody MateriaDto materia) {
 
         return ResponseEntity.status(HttpStatus.OK).body(this.materiaService.atualizar(materia));
 
