@@ -39,7 +39,7 @@ public class MateriaService implements IMateriaService {
         } catch (MateriaException materiaException) {
             throw materiaException;
         } catch (Exception exception){
-            throw new MateriaException("Erro interno identificado", HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new MateriaException("Erro interno identificado. Contate o suporte!", HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
     }
@@ -51,9 +51,9 @@ public class MateriaService implements IMateriaService {
             Materia materia1 = mapper.map(materia, Materia.class);
 
             this.materiaRepository.save(materia1);
-            return true;
+            return Boolean.TRUE;
         } catch (Exception e) {
-            return false;
+            throw new MateriaException("Erro interno identificado. Contate o suporte!", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -72,15 +72,15 @@ public class MateriaService implements IMateriaService {
                 // salvamos as alteracoes
                 this.materiaRepository.save(materiaAtualizada);
 
-                return true;
+                return Boolean.TRUE;
 
             }
 
-            return false;
+            throw new MateriaException("Erro interno identificado. Contate o suporte!", HttpStatus.INTERNAL_SERVER_ERROR);
 
 
         } catch (Exception e) {
-            return false;
+            throw new MateriaException("Erro interno identificado. Contate o suporte!", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
