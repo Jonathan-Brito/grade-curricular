@@ -2,15 +2,18 @@ package br.com.brito.cliente.escola.gradecurricular.dto;
 
 import com.sun.istack.NotNull;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.springframework.hateoas.RepresentationModel;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
 @Data
+@EqualsAndHashCode(callSuper = false)
 @NoArgsConstructor
-public class MateriaDto {
+public class MateriaDto extends RepresentationModel<MateriaDto> {
 
     private Long id;
 
