@@ -16,31 +16,39 @@ import java.util.Map;
 public class ControllerHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Response<Map<String, String>>> MethodArgumentNotValidException(MethodArgumentNotValidException materiaException){
+    public ResponseEntity<Response<Map<String,String>>> handlerMethodArgumentNotValidException(MethodArgumentNotValidException m){
 
-        Map<String, String> erros = new HashMap<>();
-
-        materiaException.getBindingResult().getAllErrors().forEach(erro ->{
+        Map<String,String> erros = new HashMap<>();
+        m.getBindingResult().getAllErrors().forEach(erro->{
             String campo = ((FieldError)erro).getField();
-            String message = erro.getDefaultMessage();
-            erros.put(campo, message);
+            String mensagem = erro.getDefaultMessage();
+            erros.put(campo,mensagem);
         });
 
-        Response<Map<String, String>> response = new Response<>();
+        Response<Map<String,String>> response = new Response<>();
         response.setStatusCode(HttpStatus.BAD_REQUEST.value());
         response.setData(erros);
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+
     }
 
     @ExceptionHandler(MateriaException.class)
-    public ResponseEntity<Response<String>> handlerMateriaException(MateriaException materiaException){
+    public ResponseEntity<Response<String>> handlerMateriaException(MateriaException m){
         Response<String> response = new Response<>();
+        response.setStatusCode(m.getHttpStatus().value());
+        response.setData(m.getMessage());
+        return ResponseEntity.status(m.getHttpStatus()).body(response);
 
-        response.setStatusCode(materiaException.getHttpStatus().value());
-        response.setData(materiaException.getMessage());
-
-
-        return ResponseEntity.status(materiaException.getHttpStatus()).body(response);
     }
+
+    /*@ExceptionHandler(CursoException.class)
+    public ResponseEntity<Response<String>> handlerCursoException(CursoException m){
+        Response<String> response = new Response<>();
+        response.setStatusCode(m.getHttpStatus().value());
+        response.setData(m.getMessage());
+        return ResponseEntity.status(m.getHttpStatus()).body(response);
+
+    }*/
+
 }

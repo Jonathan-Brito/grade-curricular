@@ -29,6 +29,8 @@ public class MateriaController {
 
     private static final String UPDATE = "UPDATE";
 
+    private static final String LIST = "GET_ALL";
+
     @Autowired
     private IMateriaService materiaService;
 
@@ -42,6 +44,30 @@ public class MateriaController {
         response.setData(this.materiaService.listar());
         response.setStatusCode(HttpStatus.OK.value());
         response.add(WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(MateriaController.class).listarMaterias())
+                .withSelfRel());
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @GetMapping("/horario-minimo/{horaMinima}")
+    public ResponseEntity<Response<List<MateriaDto>>> consultaMateriaPorHoraMinima(@PathVariable int horaMinima) {
+        Response<List<MateriaDto>> response = new Response<>();
+        List<MateriaDto> materia = this.materiaService.listarPorHorarioMinimo(horaMinima);
+        response.setData(materia);
+        response.setStatusCode(HttpStatus.OK.value());
+        response.add(WebMvcLinkBuilder
+                .linkTo(WebMvcLinkBuilder.methodOn(MateriaController.class).consultaMateriaPorHoraMinima(horaMinima))
+                .withSelfRel());
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @GetMapping("/frequencia/{frequencia}")
+    public ResponseEntity<Response<List<MateriaDto>>> consultaMateriaPorFrequencia(@PathVariable int frequencia) {
+        Response<List<MateriaDto>> response = new Response<>();
+        List<MateriaDto> materia = this.materiaService.listarPorFrequencia(frequencia);
+        response.setData(materia);
+        response.setStatusCode(HttpStatus.OK.value());
+        response.add(WebMvcLinkBuilder
+                .linkTo(WebMvcLinkBuilder.methodOn(MateriaController.class).consultaMateriaPorFrequencia(frequencia))
                 .withSelfRel());
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
