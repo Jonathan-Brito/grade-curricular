@@ -1,25 +1,27 @@
 package br.com.brito.cliente.escola.gradecurricular.entities;
 
 import com.sun.istack.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+
 @Data
+@NoArgsConstructor
 @Entity
-@Table(name = "tb_materia")
-public class Materia implements Serializable {
+@Table(name = "tb_curso")
+public class Curso implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -37,6 +39,7 @@ public class Materia implements Serializable {
     @NotNull
     private String code;
 
-    @NotNull
-    private int frequency;
+    @OneToMany(fetch = FetchType.LAZY) // Um curso está para várias materias
+    @JoinColumn(name = "materia_id")
+    private List<Materia> materias = new ArrayList<>();
 }

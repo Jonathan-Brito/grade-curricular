@@ -14,5 +14,6 @@ public enum Mensagens {
     ERRO_CURSO_NAO_ENCONTRADO("Curso não encontrado."),
     ERRO_ID_INFORMADO("ID não pode ser informado na operação de cadastro.");
 
+
     private final String valor;
 }

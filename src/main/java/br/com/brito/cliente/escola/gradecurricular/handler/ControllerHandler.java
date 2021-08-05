@@ -1,5 +1,6 @@
 package br.com.brito.cliente.escola.gradecurricular.handler;
 
+import br.com.brito.cliente.escola.gradecurricular.exception.CursoException;
 import br.com.brito.cliente.escola.gradecurricular.exception.MateriaException;
 import br.com.brito.cliente.escola.gradecurricular.model.Response;
 import org.springframework.http.HttpStatus;
@@ -42,13 +43,13 @@ public class ControllerHandler {
 
     }
 
-    /*@ExceptionHandler(CursoException.class)
+    @ExceptionHandler(CursoException.class)
     public ResponseEntity<Response<String>> handlerCursoException(CursoException m){
         Response<String> response = new Response<>();
         response.setStatusCode(m.getHttpStatus().value());
         response.setData(m.getMessage());
         return ResponseEntity.status(m.getHttpStatus()).body(response);
 
-    }*/
+    }
 
 }
