@@ -16,14 +16,10 @@ public class CursoDto extends RepresentationModel<CursoDto> {
 
     private Long id;
 
-    @NotBlank(message = "Informe o nome da materia corretamente.")
-    private String name;
+    @NotBlank(message = "Informe o nome do curso corretamente.")
+    private String nome;
 
-    @Min(value = 34, message = "Permitido o mínimo de 34 horas nessa matéria.")
-    @Max(value = 50, message = "Permitido o máximo de 50 horas nessa matéria.")
-    private int hours;
-
-    @NotBlank(message = "Informe o código da materia corretamente.")
-    private String code;
+    @NotBlank(message = "Informe o código do curso corretamente.")
+    private String codCurso;
 
 }

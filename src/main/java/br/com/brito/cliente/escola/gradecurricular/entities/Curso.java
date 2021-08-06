@@ -10,10 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -31,15 +30,12 @@ public class Curso implements Serializable {
     private Long id;
 
     @NotNull
-    private String name;
+    private String nome;
 
     @NotNull
-    private int hours;
+    private String codCurso;
 
-    @NotNull
-    private String code;
-
-    @OneToMany(fetch = FetchType.LAZY) // Um curso está para várias materias
+    @ManyToMany(fetch = FetchType.LAZY) // Um curso está para várias materias
     @JoinColumn(name = "materia_id")
-    private List<Materia> materias = new ArrayList<>();
+    private List<Materia> materias;
 }

@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ICursoRepository extends JpaRepository<Curso, Long> {
 
-    @Query("select c from Curso c where c.code =:code")
-    public Curso findCursoByCodigo(@Param("code")String code);
+    @Query("select c from Curso c where c.codCurso =:codCurso")
+    public Curso findCursoByCodigo(@Param("codCurso")String codCurso);
 }

@@ -137,8 +137,8 @@ public class CursoService implements ICursoService {
         if(cursoModel.getId()!=null) {
             curso.setId(cursoModel.getId());
         }
-        curso.setCode(cursoModel.getCodCurso());
-        curso.setName(cursoModel.getNome());
+        curso.setCodCurso(cursoModel.getCodCurso());
+        curso.setNome(cursoModel.getNome());
         curso.setMaterias(listMateriaEntity);
 
         this.cursoRepository.save(curso);
